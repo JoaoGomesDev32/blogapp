@@ -1,9 +1,12 @@
 //Carregando módulos
-const express = require('express');
-const { engine } = require('express-handlebars');
-const bodyParser = require('body-parser');
+import express from 'express';
+import { engine } from 'express-handlebars';
+import bodyParser from 'body-parser';
 const app = express();
-const admin = require('./routes/admin');
+import admin from './routes/admin.js';
+import path from "path"
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 //const mongoose = require('mongoose');
 
 //Configurações
@@ -21,6 +24,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 //Mongoose
 //EM BREVE
+//Public
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+app.use(express.static(path.join(__dirname, 'public')));
 
 //Rotas
 app.get('/', (req, res) => {
