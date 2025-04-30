@@ -9,3 +9,5 @@ const Categoria = new Schema({
 })
 
 mongoose.model('categorias', Categoria)
+
+export default Categoria
