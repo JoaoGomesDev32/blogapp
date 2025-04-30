@@ -7,6 +7,7 @@ import admin from './routes/admin.js';
 import path from "path"
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import mongoose from 'mongoose';
 //const mongoose = require('mongoose');
 
 //Configurações
@@ -23,7 +24,14 @@ app.set('view engine', 'handlebars');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 //Mongoose
-//EM BREVE
+mongoose.Promise = global.Promise;
+
+mongoose.connect('mongodb://localhost:27017/blogapp', {
+}).then(() => {
+    console.log("Conectado ao banco de dados mongodb")
+}).catch((err) => {
+    console.log("Erro ao se conectar ao mongodb: ", err)
+})
 //Public
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
