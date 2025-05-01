@@ -10,6 +10,9 @@ import { dirname } from 'path';
 import mongoose from 'mongoose';
 //const mongoose = require('mongoose');
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 //Configurações
 //Handlebars
 app.engine('handlebars', engine({
@@ -33,9 +36,12 @@ mongoose.connect('mongodb://localhost:27017/blogapp', {
     console.log("Erro ao se conectar ao mongodb: ", err)
 })
 //Public
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use((req, res, next) =>{
+    console.log('Middleware de requisição!')
+    next();
+})
 
 //Rotas
 app.get('/', (req, res) => {
