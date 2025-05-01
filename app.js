@@ -8,12 +8,29 @@ import path from "path"
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import mongoose from 'mongoose';
-//const mongoose = require('mongoose');
+import session from 'express-session';
+import flash from 'connect-flash';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 //Configurações
+//Session
+app.use(session({
+    secret: 'cursodenode',
+    resave: true,
+    saveUninitialized: true
+}));
+//Flash
+app.use(flash());
+
+//Middleware
+app.use((req, res, next) => {
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    next();
+});
+
 //Handlebars
 app.engine('handlebars', engine({
     defaultLayout: 'main',
