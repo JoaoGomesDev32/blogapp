@@ -1,8 +1,8 @@
 import express from 'express';
 const router = express.Router();
-import mongoose from "mongoose"
-import Categorias from "../models/Categoria.js"
-const Categoria = mongoose.model("categorias");
+import Categoria from "../models/Categoria.js"
+// import mongoose from "mongoose"
+// const Categoria = mongoose.model("categorias");
 
 router.get('/', (req, res) => {
     res.render('admin/index');
@@ -111,5 +111,17 @@ router.post('/categorias/deletar', (req, res) => {
     })
 });
 
+router.get("/postagens", (req, res) => {
+    res.render("admin/postagens");
+});
+
+router.get("/postagens/add", (req, res) => {
+    Categoria.find().then((categorias) => {
+        res.render("admin/addpostagem", { categorias: categorias });
+    }).catch(() => {
+        req.flash("error_msg", "Houve um erro ao carregar o formulário!");
+        res.redirect("/admin");
+    });
+});
 
 export default router;
