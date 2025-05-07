@@ -1,6 +1,9 @@
 import express from 'express';
 const router = express.Router();
 import Categoria from "../models/Categoria.js"
+import Postagem from "../models/Postagem.js";
+// import mongoose from "mongoose";
+// const Postagem = mongoose.model("postagens");
 // import mongoose from "mongoose"
 // const Categoria = mongoose.model("categorias");
 
@@ -122,6 +125,56 @@ router.get("/postagens/add", (req, res) => {
         req.flash("error_msg", "Houve um erro ao carregar o formulário!");
         res.redirect("/admin");
     });
+});
+
+router.post("/postagens/nova", (req, res) => {
+    var erros = [];
+
+    if (!req.body.titulo || typeof req.body.titulo == undefined || req.body.titulo == null) {
+        erros.push({ texto: "Título inválido!" });
+    }
+    if (!req.body.slug || typeof req.body.slug == undefined || req.body.slug == null) {
+        erros.push({ texto: "Slug inválido!" });
+    }
+    if (!req.body.descricao || typeof req.body.descricao == undefined || req.body.descricao == null) {
+        erros.push({ texto: "Descrição inválida!" });
+    }
+    if (!req.body.conteudo || typeof req.body.conteudo == undefined || req.body.conteudo == null) {
+        erros.push({ texto: "Conteúdo inválido!" });
+    }
+    if (req.body.titulo.length < 2) {
+        erros.push({ texto: "Título muito pequeno!" });
+    }
+    if (req.body.descricao.length < 10) {
+        erros.push({ texto: "Descrição muito curta!" });
+    }
+    if (req.body.categoria == "0") {
+        erros.push({ texto: "Categoria inválida, registre uma categoria!" });
+    }
+
+    if (erros.length > 0) {
+        Categoria.find().then((categorias) => {
+            res.render("admin/addpostagem", { erros: erros, categorias: categorias });
+        }).catch(() => {
+            req.flash("error_msg", "Houve um erro ao carregar as categorias!");
+            res.redirect("/admin");
+        });
+    } else {
+        const novaPostagem = {
+            titulo: req.body.titulo,
+            descricao: req.body.descricao,
+            conteudo: req.body.conteudo,
+            categoria: req.body.categoria,
+            slug: req.body.slug
+        };
+        new Postagem(novaPostagem).save().then(() => {
+            req.flash("success_msg", "Postagem criada com sucesso!");
+            res.redirect("/admin/postagens");
+        }).catch((err) => {
+            req.flash("error_msg", "Houve um erro ao salvar a postagem, tente novamente!");
+            res.redirect("/admin/postagens");
+        });
+    }
 });
 
 export default router;
