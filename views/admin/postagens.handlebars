@@ -9,7 +9,13 @@
             <p>Descrição: {{descricao}}</p>
             <small>Data: {{data}}</small><br>
             <small>Categoria: {{categoria.nome}}</small><br>
-            <a href="/admin/postagens/edit/{{_id}}"><button class="btn btn-primary mt-3">Editar</button></a>
+            <div class="d-flex gap-2">
+                <a href="/admin/postagens/edit/{{id}}"><button class="btn btn-primary">Editar</button></a>
+                <form action="/admin/postagens/deletar" method="POST">
+                    <input type="hidden" name="id" value="{{id}}">
+                    <a href="#" class="btn btn-danger" onclick="confirmDelete('{{id}}', '/admin/postagens/deletar')">Deletar</a>
+                </form>
+            </div> 
         </div>
     </div>
 {{else}}

@@ -8,11 +8,13 @@
             <h5 class="card-title">{{nome}}</h5>
             <p class="card-text">Slug: {{slug}}</p>
             <p>Data de criação: {{date}}</p>
-            <a href="/admin/categorias/edit/{{id}}"><button class="btn btn-primary">Editar</button></a>
-            <form action="/admin/categorias/deletar" method="POST">
-                <input type="hidden" name="id" value="{{id}}">
-                <a href="#" class="btn btn-danger mt-2" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" onclick="setDeleteCategoryId('{{id}}')">Deletar</a>
-            </form>
+            <div class="d-flex gap-2">
+                <a href="/admin/categorias/edit/{{id}}"><button class="btn btn-primary">Editar</button></a>
+                <form action="/admin/categorias/deletar" method="POST">
+                    <input type="hidden" name="id" value="{{id}}">
+                    <a href="#" class="btn btn-danger" onclick="confirmDelete('{{id}}', '/admin/categorias/deletar')">Deletar</a>
+                </form>
+            </div>
         </div>
     </div>
 {{else}}
