@@ -10,7 +10,9 @@ import { dirname } from 'path';
 import mongoose from 'mongoose';
 import session from 'express-session';
 import flash from 'connect-flash';
+import Postagem from './models/Postagem.js';
 
+// const Postagem = mongoose.model('postagens', Postagem);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -62,7 +64,18 @@ app.use((req, res, next) =>{
 
 //Rotas
 app.get('/', (req, res) => {
-    res.send('Rota principal!');
+    Postagem.find().populate('categoria').sort({data: 'desc'}).then((postagens) => {
+        console.log("Postagens encontradas:", postagens); // Log das postagens
+        res.render('index', { postagens: postagens });
+    }).catch((err) => {
+        console.log("Erro ao buscar postagens:", err); // Log do erro
+        req.flash('error_msg', 'Houve um erro interno');
+        res.redirect('/404');
+    })
+});
+
+app.get('/404', (req, res) => {
+    res.send('Erro 404!');
 });
 
 app.get('/posts', (req, res) => {
