@@ -65,10 +65,22 @@ app.use((req, res, next) =>{
 //Rotas
 app.get('/', (req, res) => {
     Postagem.find().populate('categoria').sort({data: 'desc'}).then((postagens) => {
-        console.log("Postagens encontradas:", postagens); // Log das postagens
         res.render('index', { postagens: postagens });
     }).catch((err) => {
-        console.log("Erro ao buscar postagens:", err); // Log do erro
+        req.flash('error_msg', 'Houve um erro interno');
+        res.redirect('/404');
+    })
+});
+
+app.get('/postagem/:slug', (req, res) => {
+    Postagem.findOne({ slug: req.params.slug }).populate('categoria').then((postagem) => {
+        if (postagem) {
+            res.render('postagem/index', { postagem: postagem });
+        } else {
+            req.flash('error_msg', 'Esta postagem não existe');
+            res.redirect('/');
+        }
+    }).catch((err) => {
         req.flash('error_msg', 'Houve um erro interno');
         res.redirect('/404');
     })

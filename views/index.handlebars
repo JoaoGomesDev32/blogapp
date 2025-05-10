@@ -9,11 +9,17 @@
 <h2>Postagens recentes: </h2>
 
 {{#each postagens}}
-    <div class="card">
+    <div class="card mt-4">
         <div class="card-body">
+            <small>{{categoria.nome}}</small>
+            <small>Data de publicação: {{data}}</small>
+            <hr>
             <h3>{{titulo}}</h3>
             <p>{{descricao}}</p>
-            <a href="/postagem/{{slug}}" class="btn btn-primary">Leia mais</a>
+            <a href="/postagem/{{slug}}"><button class="btn btn-primary">Leia mais</button></a>
+            <hr>
+            <small>Categoria: {{categoria.nome}}</small><br>
+            <small>Data de publicação: {{data}}</small>
         </div>
     </div>
 {{else}}
