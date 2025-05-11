@@ -12,6 +12,7 @@ import session from 'express-session';
 import flash from 'connect-flash';
 import Postagem from './models/Postagem.js';
 import Categoria from './models/Categoria.js';
+import usuarios from './routes/usuario.js';
 
 // const Postagem = mongoose.model('postagens', Postagem);
 const __filename = fileURLToPath(import.meta.url);
@@ -120,6 +121,8 @@ app.get('/404', (req, res) => {
 });
 
 app.use('/admin', admin);
+app.use('/usuarios', usuarios);
+
 //Outros
 const PORT = 8081
 app.listen(PORT, () => {
