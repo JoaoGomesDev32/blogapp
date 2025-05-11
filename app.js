@@ -11,6 +11,7 @@ import mongoose from 'mongoose';
 import session from 'express-session';
 import flash from 'connect-flash';
 import Postagem from './models/Postagem.js';
+import Categoria from './models/Categoria.js';
 
 // const Postagem = mongoose.model('postagens', Postagem);
 const __filename = fileURLToPath(import.meta.url);
@@ -86,12 +87,36 @@ app.get('/postagem/:slug', (req, res) => {
     })
 });
 
-app.get('/404', (req, res) => {
-    res.send('Erro 404!');
+app.get('/categorias', (req, res) => {
+    Categoria.find().then((categorias) => {
+        res.render('categorias/index', { categorias: categorias });
+    }).catch((err) => {
+        req.flash('error_msg', 'Houve um erro interno ao listar as categorias');
+        res.redirect('/');
+    });
 });
 
-app.get('/posts', (req, res) => {
-    res.send('Lista de posts!');
+app.get('/categorias/:slug', (req, res) => {
+    Categoria.findOne({ slug: req.params.slug }).then((categoria) => {
+        if (categoria) {
+            Postagem.find({ categoria: categoria._id }).then((postagens) => {
+                res.render('categorias/postagens', { postagens: postagens, categoria: categoria });
+            }).catch((err) => {
+                req.flash('error_msg', 'Houve um erro ao listar os posts');
+                res.redirect('/');
+            })
+        } else {
+            req.flash('error_msg', 'Esta categoria não existe');
+            res.redirect('/');
+        }
+    }).catch((err) => {
+        req.flash('error_msg', 'Houve um erro interno');
+        res.redirect('/');
+    })
+});
+
+app.get('/404', (req, res) => {
+    res.send('Erro 404!');
 });
 
 app.use('/admin', admin);
