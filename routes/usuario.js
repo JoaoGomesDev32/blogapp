@@ -36,11 +36,11 @@ router.post('/registro', (req, res) => {
     if (erros.length > 0) {
         res.render('usuarios/registro', { erros: erros });
     } else {
-        Usuario.findOne({email: req.body.email}).then((usuario) => {
-            if(usuario) {
+        Usuario.findOne({ email: req.body.email }).then((usuario) => {
+            if (usuario) {
                 req.flash("error_msg", "Já existe uma conta com este e-mail")
                 res.redirect("/usuarios/registro")
-            }else {
+            } else {
                 const novoUsuario = new Usuario({
                     nome: req.body.nome,
                     email: req.body.email,
@@ -48,8 +48,8 @@ router.post('/registro', (req, res) => {
                 })
 
                 bcrypt.genSalt(10, (erro, salt) => {
-                    bcrypt.hash(novoUsuario.senha, salt, (erro,hash) => {
-                        if(erro) {
+                    bcrypt.hash(novoUsuario.senha, salt, (erro, hash) => {
+                        if (erro) {
                             req.flash("error_msg", "Houve um erro durante o salvamento do usuário")
                             res.redirect("/")
                         }
@@ -70,6 +70,10 @@ router.post('/registro', (req, res) => {
             res.redirect("/")
         })
     }
+});
+
+router.get('/login', (req, res) => {
+    res.render('usuarios/login');
 });
 
 export default router;
