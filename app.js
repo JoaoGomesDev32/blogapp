@@ -13,6 +13,10 @@ import flash from 'connect-flash';
 import Postagem from './models/Postagem.js';
 import Categoria from './models/Categoria.js';
 import usuarios from './routes/usuario.js';
+import passport from 'passport';
+import auth from './config/auth.js'
+
+auth(passport);
 
 // const Postagem = mongoose.model('postagens', Postagem);
 const __filename = fileURLToPath(import.meta.url);
@@ -25,6 +29,9 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
+
+app.use(passport.initialize());
+app.use(passport.session());
 //Flash
 app.use(flash());
 
@@ -59,14 +66,14 @@ mongoose.connect('mongodb://localhost:27017/blogapp', {
 //Public
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use((req, res, next) =>{
+app.use((req, res, next) => {
     console.log('Middleware de requisição!')
     next();
 })
 
 //Rotas
 app.get('/', (req, res) => {
-    Postagem.find().populate('categoria').sort({data: 'desc'}).then((postagens) => {
+    Postagem.find().populate('categoria').sort({ data: 'desc' }).then((postagens) => {
         res.render('index', { postagens: postagens });
     }).catch((err) => {
         req.flash('error_msg', 'Houve um erro interno');
