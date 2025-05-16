@@ -83,6 +83,13 @@ router.post('/login', (req, res, next) => {
         failureRedirect: '/usuarios/login',
         failureFlash: true
     })(req, res, next)
+});
+
+router.get('/logout', (req, res) => {
+    req.logout(() => {
+        req.flash('success_msg', 'Deslogado com sucesso!')
+        res.redirect('/')
+    })
 })
 
 export default router;
