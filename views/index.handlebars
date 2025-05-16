@@ -1,24 +1,24 @@
 <div class="bg-light p-5 rounded-lg m-3">
-  <h1 class="display-4">Bem vindo ao DevBlog!</h1>
-  <p class="lead">Dicas, tutoriais e novidades sobre desenvolvimento web com Node.js, JavaScript e muito mais.</p>
-  <hr class="my-4">
-  <p>Explore conteúdos criados por desenvolvedores para desenvolvedores. Aprenda, compartilhe e evolua!</p>
-  <a class="btn btn-primary btn-lg" href="#" role="button">Crie uma conta</a>
+    <h1 class="display-4">Bem vindo ao DevBlog!</h1>
+    <p class="lead">Dicas, tutoriais e novidades sobre desenvolvimento web com Node.js, JavaScript e muito mais.</p>
+    <hr class="my-4">
+    <p>Explore conteúdos criados por desenvolvedores para desenvolvedores. Aprenda, compartilhe e evolua!</p>
+    <a class="btn btn-primary btn-lg" href="/usuarios/registro" role="button">Crie uma conta</a>
 </div>
 <hr>
 <h2>Postagens recentes: </h2>
 
 {{#each postagens}}
-    <div class="card mt-4">
-        <div class="card-body">
-            <h3>{{titulo}}</h3>
-            <p>{{descricao}}</p>
-            <a href="/postagem/{{slug}}"><button class="btn btn-primary">Leia mais</button></a>
-            <hr>
-            <small>Categoria: {{categoria.nome}}</small><br>
-            <small>Data de publicação: {{data}}</small>
-        </div>
+<div class="card mt-4">
+    <div class="card-body">
+        <h3>{{titulo}}</h3>
+        <p>{{descricao}}</p>
+        <a href="/postagem/{{slug}}"><button class="btn btn-primary">Leia mais</button></a>
+        <hr>
+        <small>Categoria: {{categoria.nome}}</small><br>
+        <small>Data de publicação: {{data}}</small>
     </div>
+</div>
 {{else}}
-    <h5>Nenhuma postagem</h5>
+<h5>Nenhuma postagem</h5>
 {{/each}}
