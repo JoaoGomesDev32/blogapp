@@ -1,0 +1,87 @@
+/* public/css/dark-blog.css */
+body {
+    background: #181a1b;
+    color: #e0e0e0;
+}
+
+.card,
+.modal-content {
+    background: #23272b;
+    color: #e0e0e0;
+    border: 1px solid #343a40;
+}
+
+input,
+textarea,
+select {
+    background: #181a1b;
+    color: #e0e0e0;
+    border: 1px solid #343a40;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    background: #23272b;
+    color: #fff;
+    border-color: #61dafb;
+}
+
+.alert {
+    background: #23272b;
+    border-left: 4px solid #dc3545;
+    color: #ffb3b3;
+}
+
+:root {
+    --bs-primary: #00bcd4;
+}
+
+.btn-primary,
+.btn-primary:active,
+.btn-primary:focus,
+.btn-primary:hover {
+    background-color: #00bcd4 !important;
+    border-color: #00bcd4 !important;
+    color: #181a1b !important;
+}
+
+a,
+.nav-link {
+    color: #00bcd4 !important;
+}
+
+a:hover,
+.nav-link:hover {
+    color: #00e6ff !important;
+}
+
+.btn-success,
+.btn-success:active,
+.btn-success:focus,
+.btn-success:hover {
+    background-color: #00ff99 !important;
+    border-color: #00ff99 !important;
+    color: #181a1b !important;
+}
+
+.btn-danger,
+.btn-danger:active,
+.btn-danger:focus,
+.btn-danger:hover {
+    background-color: #ff3b47 !important;
+    border-color: #ff3b47 !important;
+    color: #fff !important;
+}
+
+.alert-success {
+    background: #23272b;
+    border-left: 4px solid #00ff99;
+    color: #baffd9;
+}
+
+.alert-danger {
+    background: #23272b;
+    border-left: 4px solid #ff3b47;
+    color: #ffb3b3;
+}

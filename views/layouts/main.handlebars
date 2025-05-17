@@ -4,8 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/dark-blog.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog NodeJS</title>
+    <meta name="description"
+        content="{{#if pageDescription}}{{pageDescription}}{{else}}Blog para desenvolvedores sobre Node.js, JavaScript e tecnologia.{{/if}}">
+    <meta property="og:title" content="{{pageTitle}}">
+    <meta property="og:description" content="{{pageDescription}}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{currentUrl}}">
+    <meta property="og:image" content="{{ogImage}}">
+    <title>{{#if pageTitle}}{{pageTitle}} - DevBlog{{else}}DevBlog{{/if}}</title>
 </head>
 
 <body>

@@ -1,10 +1,12 @@
-<div class="bg-light p-5 rounded-lg m-3">
+<main class="bg-dark p-5 rounded-lg m-3">
     <h1 class="display-4">Bem vindo ao DevBlog!</h1>
     <p class="lead">Dicas, tutoriais e novidades sobre desenvolvimento web com Node.js, JavaScript e muito mais.</p>
     <hr class="my-4">
     <p>Explore conteúdos criados por desenvolvedores para desenvolvedores. Aprenda, compartilhe e evolua!</p>
+    {{#unless user}}
     <a class="btn btn-primary btn-lg" href="/usuarios/registro" role="button">Crie uma conta</a>
-</div>
+    {{/unless}}
+</main>
 <hr>
 <h2>Postagens recentes: </h2>
 
