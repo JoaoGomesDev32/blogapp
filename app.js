@@ -61,14 +61,12 @@ app.use(bodyParser.json());
 //Mongoose
 mongoose.Promise = global.Promise;
 
-mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost:27017/blogapp', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then(() => {
-    console.log("Conectado ao banco de dados MongoDB");
-}).catch((err) => {
-    console.log("Erro ao se conectar ao MongoDB: ", err);
-});
+mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost:27017/blogapp')
+    .then(() => {
+        console.log("Conectado ao banco de dados MongoDB");
+    }).catch((err) => {
+        console.log("Erro ao se conectar ao MongoDB: ", err);
+    });
 
 //Public
 app.use(express.static(path.join(__dirname, 'public')));
