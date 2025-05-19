@@ -54,6 +54,7 @@ app.engine('handlebars', engine({
         allowProtoMethodsByDefault: true
     }
 }));
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'handlebars');
 //Body Parser
 app.use(bodyParser.urlencoded({ extended: false }));
