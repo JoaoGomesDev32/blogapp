@@ -13,11 +13,12 @@
   },
   "name": "blogapp",
   "version": "1.0.0",
-  "description": "",
+  "description": "![Tela inicial do DevBlog](./public/img/Captura%20de%20ecrã%202025-05-17%20143022.png)",
   "main": "app.js",
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
